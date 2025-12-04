@@ -48,7 +48,7 @@ namespace Demo
 
 		// I create an item from a mesh. The mesh must be in the resource path that has been set in the graphic system.
         Ogre::Item* item = sceneManager->createItem(
-            "Cube_d.mesh", Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME,
+            "CubeFromMedia_d.mesh", Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME,
             Ogre::SCENE_DYNAMIC);
 
 		// I create a scene node to attach the item to it.

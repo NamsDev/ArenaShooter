@@ -872,7 +872,16 @@ namespace Demo
         loadHlmsDiskCache();
 
         // Initialise, parse scripts etc
+        Ogre::ResourceGroupManager& rgm = Ogre::ResourceGroupManager::getSingleton();
+        rgm.addResourceLocation("../Data/Media/Models", "FileSystem", "ArenaShooter");
+
         Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups( true );
+
+        auto resources = Ogre::ResourceGroupManager::getSingleton().listResourceNames("ArenaShooter");
+        for (int i = 0; i < resources->size(); ++i)
+        {
+            Ogre::LogManager::getSingleton().logMessage(resources->at(i));
+        }
 
         try
         {
