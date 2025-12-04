@@ -20,6 +20,8 @@
 #include "OgreHlmsPbs.h"
 #include "OgreRoot.h"
 
+#include "PhysicSystem.h"
+
 using namespace Demo;
 
 namespace Demo
@@ -30,6 +32,15 @@ namespace Demo
     EmptyProjectGameState::EmptyProjectGameState( const Ogre::String &helpDescription ) :
         TutorialGameState( helpDescription )
     {
+		pItemSceneNode = nullptr;
+
+        pPhysicSystem = new PhysicSystem();
+        pPhysicSystem->initialize();
+    }
+    EmptyProjectGameState::~EmptyProjectGameState()
+    {
+        pPhysicSystem->deinitialize();
+        delete pPhysicSystem;
     }
     //-----------------------------------------------------------------------------------
     void EmptyProjectGameState::createScene01()
@@ -59,6 +70,8 @@ namespace Demo
     void EmptyProjectGameState::update( float timeSinceLast )
     {
         TutorialGameState::update( timeSinceLast );
+
+		pPhysicSystem->update(timeSinceLast);
 
         // Self made accumulated time.
 		time += timeSinceLast;
