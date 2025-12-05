@@ -61,10 +61,23 @@ namespace Demo
         Ogre::Item* item = sceneManager->createItem(
             "CubeFromMedia_d.mesh", Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME,
             Ogre::SCENE_DYNAMIC);
+        item->setDatablock("Rocks");
+        item->setVisibilityFlags(0x000000001);
 
 		// I create a scene node to attach the item to it.
         pItemSceneNode = root->createChildSceneNode(Ogre::SCENE_DYNAMIC);
         pItemSceneNode->attachObject(item);
+
+        Ogre::Light* light = sceneManager->createLight();
+        Ogre::SceneNode* lightNode = root->createChildSceneNode();
+        lightNode->attachObject(light);
+        light->setPowerScale(97.0f);
+        light->setType(Ogre::Light::LT_DIRECTIONAL);
+        light->setDirection(Ogre::Vector3(-1, -1, -1).normalisedCopy());
+
+        sceneManager->setAmbientLight(Ogre::ColourValue(0.3f, 0.5f, 0.7f) * 0.1f * 0.75f * 60.0f,
+            Ogre::ColourValue(0.6f, 0.45f, 0.3f) * 0.065f * 0.75f * 60.0f,
+            -light->getDirection() + Ogre::Vector3::UNIT_Y * 0.2f);
     }
     //-----------------------------------------------------------------------------------
     void EmptyProjectGameState::update( float timeSinceLast )
